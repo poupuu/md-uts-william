@@ -132,20 +132,20 @@ creditScoreScaler = joblib.load("AllPickle/creditScoreScaler.pkl")
 st.title("Loan Approval Prediction")
 
 # Input fields
-gender = st.selectbox("Gender", genderEncoder.classes_)
-education = st.selectbox("Education", educationEncoder.classes_)
-home_ownership = st.selectbox("Home Ownership", homeOwnershipEncoder.classes_)
-loan_intent = st.selectbox("Loan Intent", loanIntentEncoder.classes_)
-previous_default = st.selectbox("Previous Default", previousFileEncoder.classes_)
+gender = st.selectbox("person_gender", genderEncoder.classes_)
+education = st.selectbox("person_education", educationEncoder.classes_)
+home_ownership = st.selectbox("person_home_ownership", homeOwnershipEncoder.classes_)
+loan_intent = st.selectbox("loan_intent", loanIntentEncoder.classes_)
+previous_default = st.selectbox("previous_loan_defaults_on_file", previousFileEncoder.classes_)
 
-age = st.slider("Age", 18, 70, 30)
-income = st.number_input("Annual Income", value=2.448661e+06)
-emp_length = st.slider("Employment Length (Years)", 0, 40, 5)
-loan_amount = st.number_input("Loan Amount", value=10000.0)
-int_rate = st.slider("Interest Rate (%)", 0.0, 30.0, 12.5)
-loan_percent_income = st.slider("Loan Percent Income", 0.0, 100.0, 10.0)
-person_cred = st.slider("Person Credit Length (Years)", 0.0, 50.0, 10.0)
-credit_score = st.slider("Credit Score", 300, 850, 600)
+age = st.slider("person_age", 18, 70, 30)
+income = st.number_input("person_income", value=2.448661e+06)
+emp_length = st.slider("person_emp_exp", 0, 40, 5)
+loan_amount = st.number_input("loan_amnt", value=10000.0)
+int_rate = st.slider("loan_int_rate", 0.0, 30.0, 12.5)
+loan_percent_income = st.slider("loan_percent_income", 0.0, 100.0, 10.0)
+person_cred = st.slider("cb_person_cred_hist_length", 0.0, 50.0, 10.0)
+credit_score = st.slider("credit_score", 300, 850, 600)
 
 # Preprocessing
 gender_encoded = genderEncoder.transform([gender])[0]
