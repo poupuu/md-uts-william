@@ -56,8 +56,7 @@ def feature_scaling(df):
 
 def predictionLoan(user_input):
   prediction = model.predict(user_input)
-  decoded_prediction = targetEncoder.inverse_transform([[prediction[0]]])  
-  return decoded_prediction[0][0]
+  return prediction[0][0]
 
 def classification_proba(user_input):
   predictProba = model.predict_proba(user_input)
