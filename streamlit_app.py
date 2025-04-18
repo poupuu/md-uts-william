@@ -164,7 +164,7 @@ loan_percent_income = st.slider('loan_percent_income', min_value=0.0, max_value=
 cb_person_cred_hist_length = st.slider('cb_person_cred_hist_length', min_value=0.0, max_value=50.0, value=10.0)
 credit_score = st.slider('credit_score', min_value=300, max_value=850, value=600)
 
-input_data = ['person_age', 'person_gender', 'person_education', 'person_income', 'person_emp_exp', 'person_home_ownership', 'loan_amnt ', 'loan_intent', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length', 'credit_score', 'previous_loan_defaults_on_file'])
+input_data = ['person_age', 'person_gender', 'person_education', 'person_income', 'person_emp_exp', 'person_home_ownership', 'loan_amnt ', 'loan_intent', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length', 'credit_score', 'previous_loan_defaults_on_file']
 
 user_df = convert_input_to_df(input_data)
 
