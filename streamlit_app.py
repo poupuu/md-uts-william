@@ -105,6 +105,6 @@ st.write('The predicted output is: ', prediction)
   
 # # Predict
 if st.button("Predict Loan Approval"):
-    prediction = models.predict(user_input)
+    prediction = model.predict(user_input)
     result = "Approved" if prediction[0] == 1 else "Not Approved"
     st.success(f"Loan Status Prediction: **{result}**")
