@@ -1,21 +1,28 @@
-# import streamlit as st
-# import joblib
-# import pandas as pd
+import streamlit as st
+import numpy as np
+import joblib
+import pickle
+from xgboost import XGBClassifier
 
-# genderEncoder = joblib.load("AllPickle/genderEncoder.pkl")
-# educationEncoder = joblib.load("AllPickle/educationEncoder.pkl")
-# homeOwnershipEncoder = joblib.load("AllPickle/homeOwnershipEncoder.pkl")
-# loanIntentEncoder = joblib.load("AllPickle/loanIntentEncoder.pkl")
-# previousFileEncoder = joblib.load("AllPickle/previousFileEncoder.pkl")
+# Load model
+model = joblib.load("AllPickle/XGBModel.pkl")
 
-# ageScaler = joblib.load("AllPickle/ageScaler.pkl")
-# incomeScaler = joblib.load("AllPickle/incomeScaler.pkl")
-# empExpScaler = joblib.load("AllPickle/empExpScaler.pkl")
-# loanAmountScaler = joblib.load("AllPickle/loanAmountScaler.pkl")
-# intRateScaler = joblib.load("AllPickle/intRateScaler.pkl")
-# loanPercentScaler = joblib.load("AllPickle/loanPercentScaler.pkl")
-# personCredScaler = joblib.load("AllPickle/personCredScaler.pkl")
-# creditScoreScaler = joblib.load("AllPickle/creditScoreScaler.pkl")
+# Load encoders
+genderEncoder = joblib.load("AllPickle/genderEncoder.pkl")
+educationEncoder = joblib.load("AllPickle/educationEncoder.pkl")
+homeOwnershipEncoder = joblib.load("AllPickle/homeOwnershipEncoder.pkl")
+loanIntentEncoder = joblib.load("AllPickle/loanIntentEncoder.pkl")
+previousFileEncoder = joblib.load("AllPickle/previousFileEncoder.pkl")
+
+# Load scalers
+ageScaler = joblib.load("AllPickle/ageScaler.pkl")
+incomeScaler = joblib.load("AllPickle/incomeScaler.pkl")
+empExpScaler = joblib.load("AllPickle/empExpScaler.pkl")
+loanAmountScaler = joblib.load("AllPickle/loanAmountScaler.pkl")
+intRateScaler = joblib.load("AllPickle/intRateScaler.pkl")
+loanPercentScaler = joblib.load("AllPickle/loanPercentScaler.pkl")
+personCredScaler = joblib.load("AllPickle/personCredScaler.pkl")
+creditScoreScaler = joblib.load("AllPickle/creditScoreScaler.pkl")
 
 def split_data(data, target_column="loan_status"):
   output_df = data[target_column]
@@ -58,91 +65,6 @@ def classification_proba(user_input):
   ]
   probaDF = pd.DataFrame(predictProba, columns=column_names)
   return probaDF
-
-# def main():
-#   st.title('Loan Classification')
-#   st.info("This app use machine learning to classify loan approved or not.")
-
-#   st.subheader("Dataset")
-#   df = pd.read_csv("Dataset_A_loan.csv")
-#   x, y = split_data(df)
-  
-#   with st.expander("**Raw Data**"):
-#     st.dataframe(df.head(50))
-
-#   with st.expander("**Input Data**"):
-#     st.dataframe(x.head(50))
-
-#   with st.expander("**Output Data**"):
-#     st.dataframe(y.head(50))
-
-#   st.subheader("Input Loan Data")
-#   Age = st.slider('person_age', min_value = 21, max_value = 70, value = 21)
-#   Income = st.slider('person_income', min_value = 8000, max_value = 2.00, value = 1.75)
-#   Weight = st.slider('Weight', min_value = 30, max_value = 180, value = 70)
-#   FCVC = st.slider('FCVC', min_value = 1, max_value = 3, value = 2)
-#   NCP = st.slider('NCP', min_value = 1, max_value = 4, value = 3)
-#   CH2O = st.slider('CH2O', min_value = 1, max_value = 3, value = 2)
-#   FAF = st.slider('FAF', min_value = 0, max_value = 3, value = 1)
-#   TUE = st.slider('TUE', min_value = 0, max_value = 2, value = 1)
-  
-#   Gender = st.selectbox('Gender', ('Male', 'Female'))
-#   family_history_with_overweight = st.selectbox('Family history with overweight', ('yes', 'no'))
-#   FAVC = st.selectbox('FAVC', ('yes', 'no'))
-#   CAEC = st.selectbox('CAEC', ('Sometimes', 'Frequently', 'Always', 'no'))
-#   SMOKE = st.selectbox('SMOKE', ('yes', 'no'))
-#   SCC = st.selectbox('SCC', ('yes', 'no'))
-#   CALC = st.selectbox('CALC', ('Sometimes', 'no', 'Frequently', 'Always'))
-#   MTRANS = st.selectbox('MTRANS', ('Public_Transportation', 'Automobile', 'Walking', 'Motorbike', 'Bike'))
-
-#   input_data = [Gender, Age, Height, Weight, family_history_with_overweight, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS]
-
-#   user_df = convert_input_to_df(input_data)
-
-#   st.subheader("Inputted Patient Data")
-#   st.dataframe(user_df)
-
-#   user_df = encode_features(user_df)
-#   user_df = normalize_features(user_df)
-
-#   prediction = predict_classification(user_df)
-#   proba = classification_proba(user_df)
-
-#   st.subheader("Prediction Result")
-#   st.dataframe(proba)
-#   st.write('The predicted output is: ', prediction)
-  
-
-# if __name__ == "__main__":
-#   main()
-
-import streamlit as st
-import numpy as np
-import joblib
-import pickle
-from xgboost import XGBClassifier
-
-# Load model
-# with open("AllPickle/XGBModel.pkl", "rb") as file:
-#     models = pickle.load(file)
-model = joblib.load("AllPickle/XGBModel.pkl")
-
-# Load encoders
-genderEncoder = joblib.load("AllPickle/genderEncoder.pkl")
-educationEncoder = joblib.load("AllPickle/educationEncoder.pkl")
-homeOwnershipEncoder = joblib.load("AllPickle/homeOwnershipEncoder.pkl")
-loanIntentEncoder = joblib.load("AllPickle/loanIntentEncoder.pkl")
-previousFileEncoder = joblib.load("AllPickle/previousFileEncoder.pkl")
-
-# Load scalers
-ageScaler = joblib.load("AllPickle/ageScaler.pkl")
-incomeScaler = joblib.load("AllPickle/incomeScaler.pkl")
-empExpScaler = joblib.load("AllPickle/empExpScaler.pkl")
-loanAmountScaler = joblib.load("AllPickle/loanAmountScaler.pkl")
-intRateScaler = joblib.load("AllPickle/intRateScaler.pkl")
-loanPercentScaler = joblib.load("AllPickle/loanPercentScaler.pkl")
-personCredScaler = joblib.load("AllPickle/personCredScaler.pkl")
-creditScoreScaler = joblib.load("AllPickle/creditScoreScaler.pkl")
 
 # UI
 st.title("Loan Approval Prediction")
