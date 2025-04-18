@@ -103,8 +103,9 @@ st.subheader("Prediction Result")
 st.dataframe(proba)
 st.write('The predicted output is: ', prediction)
   
-# # Predict
+# Predict
 if st.button("Predict Loan Approval"):
-    prediction = model.predict(user_input)
-    result = "Approved" if prediction[0] == 1 else "Not Approved"
+    prediction = predictionLoan(user_df)
+    result = "Approved" if prediction == 1 else "Not Approved"
     st.success(f"Loan Status Prediction: **{result}**")
+
