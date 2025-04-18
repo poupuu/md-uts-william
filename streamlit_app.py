@@ -104,11 +104,12 @@ import streamlit as st
 import numpy as np
 import joblib
 import pickle
+from xgboost import XGBClassifier
 
 # Load model
 # with open("AllPickle/XGBModel.pkl", "rb") as file:
 #     models = pickle.load(file)
-models = joblib.load("AllPickle/XGBModel.pkl")
+model = joblib.load("AllPickle/XGBModel.pkl")
 
 # Load encoders
 genderEncoder = joblib.load("AllPickle/genderEncoder.pkl")
