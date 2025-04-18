@@ -22,6 +22,11 @@
 #   input_df = data.drop(target_column, axis=1)
 #   return input_df, output_df
 
+def convert_input_to_df(input_data):
+  data = [input_data]
+  df = pd.DataFrame(data, columns = ['person_age', 'person_gender', 'person_education', 'person_income', 'person_emp_exp', 'person_home_ownership', 'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'MTRANS'])
+  return df
+
 # def feature_encode(df):
 #   df["person_gender"] = genderEncoder.transform(df[["person_gender"]])
 #   df["person_education"] = educationEncoder.transform(df[["person_education"]])
@@ -148,27 +153,9 @@ loan_percent_income = st.slider('loan_percent_income', min_value=0.0, max_value=
 person_cred = st.slider('cb_person_cred_hist_length', min_value=0.0, max_value=50.0, value=10.0)
 credit_score = st.slider('credit_score', min_value=300, max_value=850, value=600)
 
-# Preprocessing
-gender_encoded = genderEncoder.transform([gender])[0]
-education_encoded = educationEncoder.transform([education])[0]
-home_encoded = homeOwnershipEncoder.transform([home_ownership])[0]
-loan_intent_encoded = loanIntentEncoder.transform([loan_intent])[0]
-prev_default_encoded = previousFileEncoder.transform([previous_default])[0]
 
-scaled_age = ageScaler.transform([[age]])[0][0]
-scaled_income = incomeScaler.transform([[income]])[0][0]
-scaled_emp = empExpScaler.transform([[emp_length]])[0][0]
-scaled_loan = loanAmountScaler.transform([[loan_amount]])[0][0]
-scaled_int_rate = intRateScaler.transform([[int_rate]])[0][0]
-scaled_loan_percent = loanPercentScaler.transform([[loan_percent_income]])[0][0]
-scaled_person_cred = personCredScaler.transform([[person_cred]])[0][0]
-scaled_credit_score = creditScoreScaler.transform([[credit_score]])[0][0]
 
-# Combine input
-user_input = np.array([[scaled_age, scaled_income, gender_encoded, education_encoded,
-                        home_encoded, loan_intent_encoded, scaled_emp,
-                        scaled_loan, scaled_int_rate, scaled_loan_percent,
-                        scaled_person_cred, scaled_credit_score, prev_default_encoded]])
+
 
 # Predict
 if st.button("Predict Loan Approval"):
