@@ -107,7 +107,7 @@ import pickle
 
 # Load model
 with open("AllPickle/XGBModel.pkl", "rb") as file:
-    model = pickle.load(file)
+    models = pickle.load(file)
 
 # Load encoders
 genderEncoder = joblib.load("AllPickle/genderEncoder.pkl")
