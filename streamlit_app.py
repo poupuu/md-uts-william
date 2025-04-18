@@ -1,4 +1,4 @@
-import streamlit as st
+eimport streamlit as st
 import numpy as np
 import joblib
 import pickle
@@ -94,11 +94,20 @@ st.subheader("Inputted Patient Data")
 st.dataframe(user_df)
 
 user_df = feature_encode(user_df)
-user_df = scaling
+user_df = feature_scaling(user_df)
 
+prediction = predictionLoan(user_df)
+proba = classification_proba(user_df)
 
-# Predict
-if st.button("Predict Loan Approval"):
-    prediction = model.predict(user_input)
-    result = "Approved" if prediction[0] == 1 else "Not Approved"
-    st.success(f"Loan Status Prediction: **{result}**")
+st.subheader("Prediction Result")
+st.dataframe(proba)
+st.write('The predicted output is: ', prediction)
+  
+if __name__ == "__main__":
+  main()
+
+# # Predict
+# if st.button("Predict Loan Approval"):
+#     prediction = model.predict(user_input)
+#     result = "Approved" if prediction[0] == 1 else "Not Approved"
+#     st.success(f"Loan Status Prediction: **{result}**")
